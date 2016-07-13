@@ -1,0 +1,129 @@
+
+#game-container {
+  width: 65em;
+  height: 35em;
+  /*border: 2px solid red;*/
+  margin: 0 auto;
+  margin-top: 10%;
+  float: left;
+  margin-left: 4%;
+  background-color: #87cefa;
+}
+
+#score {
+  width: 20em;
+  height: 35em;
+  float: right;
+  /*border: 2px solid blue;*/
+  margin-top: 10%;
+  margin-right: 12%;
+}
+
+#game-top {
+  width: 55em;
+  height: 12em;
+  border: 1px solid black;
+  margin-left: 8%;
+  margin-top: 8%;
+  background-color: #ffe4b5;
+}
+
+#word {
+  text-align: center;
+  font-size: 4em;
+  padding-top: 4%;
+  letter-spacing: .1em;
+  margin-left: 2%;
+  word-wrap: break-word;
+
+}
+
+#button1, #button2 {
+  width: 100em;
+  padding-right:54%;
+  text-align: center;
+  display: inline-block;
+
+}
+
+#button1 {
+  padding-top: 2%;
+}
+
+#A, #B,
+#C, #D,
+#E, #F,
+#G, #H,
+#I, #J,
+#K, #L,
+#M, #N,
+#O, #P,
+#Q, #R,
+#S, #T,
+#U, #V,
+#W, #X,
+#Y, #Z {
+  width: 1.1em;
+  font-size: 4em;
+  background-color: pink;
+
+}
+
+#letters-used, #wrong-attemp {
+  width: 10em;
+  height: 3em;
+  /*display: inline-flex;
+  flex-flow: wrap;*/
+  border: 2px solid black;
+  margin:0 auto;
+  margin-left: 8%;
+  /*margin-top: 10%;*/
+  font-size: 1.5em;
+  font-weight: bold;
+  /*font-style: italic;
+  font-family: fantasy;*/
+  background-color: #ffd700;
+  text-align: center;
+  padding-top: 4.5%;
+
+  /*padding-top: .2em;*/
+  /*vertical-align: top;*/
+}
+
+#letter-desc, #wrong-desc {
+  font-size: 2em;
+  margin-top: 15%;
+  margin-left: 1%;
+}
+
+/*#wrong-attemp {
+  color: black;
+  text-align: center;
+  font-size: .5em;
+
+}*/
+
+#start-button {
+    border: none;
+    color: black;
+    /*padding: .2em 1em;
+    margin: 1.2em;*/
+    text-align: center;
+    text-decoration: none;
+    /*display: inline-block;*/
+    font-size: 5em;
+    width: 5em;
+    border-radius: 100px / 50px;
+    margin-top: 3%;
+}
+
+#start {
+  margin-right: 3em;
+  background-color: #27d44a;
+  font-size: .5em;
+  border-radius: 100px / 75px;
+}
+
+#clear1 {
+  clear: both;
+}
