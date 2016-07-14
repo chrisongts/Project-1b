@@ -1,11 +1,15 @@
 window.onload = function() {
 
     var charSelcted = ' ';
+    var numOfWrongAttemp = 0;
+    var charUsed = [];
+    var displayWord = [];
 
     var start = document.getElementById('start');
     start.addEventListener('click', startGame);
 
 
+    // wordSet () is to set up the available words in the array
 
     function wordsSet() {
 
@@ -15,39 +19,64 @@ window.onload = function() {
                'skyscraper', 'conclusive', 'breakthrough',
                'relinquish', 'transcribe', 'disruption',
                'underwrite', 'extinguish', 'commendable',
-               'reciprocate', 'waterfront'];
+               'reciprocate', 'waterfront', 'typography',
+               'responsive', 'standards', 'definitions',
+               'orientations', 'automatically', 'determination',
+               'establishing', 'calculate', 'established',
+               'broadcast', 'mathematics', 'demonstrate',
+               'researchers', 'deliberately', 'statement',
+               'settlement', 'dispute', 'obstacle',
+               'stainless', 'government', 'published',
+               'apprehend', 'arrested', 'investigations',
+               'immediately', 'jeopardise', 'authorities',
+               'accidently', 'suffocate', 'concern',
+               'overloaded', 'vulnerability', 'neglect',
+               'improvement', 'performance', 'expected',
+               'smartphone', 'capacity', 'electronics',
+               'launching', 'surprise', 'responsible',
+               'collection', 'collaboration', 'fashion',
+               'business', 'forecast', 'analysts',
+               'consumption', 'adventure', 'headlines',
+               'alongside', 'diversity', 'collaboration',
+               'understand', 'population', 'community',
+               'childhood', 'provision', 'anniversary',
+               'delinquency', 'celebrity', 'magazine',
+               'superstar', 'popularly', 'production',
+               'television', 'peacefully', 'appreciation',
+               'composition', 'interview', 'director',
+               'deserve', 'alternative', 'possibilities',
+               'proposition', 'sustainable', 'memorial',
+               'violence'];
 
     } // end of wordsSet
 
+    // selectWord() is to select the word from the array pool.
+    // It also format the word to be display on screen.
+
     function selectWord() {
 
-      searchWord = true;
-      numOfWrongAttemp = 0;
-      charUsed = [];
+      var searchWord = true;
+      var result = [];
+      var position = [];
+      var count = 0;
 
       start.removeEventListener('click', startGame);
 
-
+      reinstate();
 
       while (searchWord) {
         random = Math.random();
-        console.log(random);
-        if ( random < .193 ) {
+        if ( random < .993 ) {
           random *= 100;
           index = Math.round(random);
           searchWord = false;
         };
       };
 
-      word = document.getElementById('word');
+      var word = document.getElementById('word');
 
       wordSelected = words[index];
       answer = wordSelected.split('');
-
-      searchWord = true;
-
-      result = [];
-      position = [];
 
       for ( i = 0; i < answer.length; i++ ) {
         result[i] = '_';
@@ -76,12 +105,10 @@ window.onload = function() {
            }
       } // end of first for-loop checking for a e i o u and repeated chars
 
-      displayWord = [];
+      // displayWord = [];
       for ( i = 0; i < answer.length; i++ ) {
         displayWord[i] = '_';
       }  // fill '-' to array result
-
-      count = 0;
 
       for ( i = 0; i < answer.length; i++ ) {
         if ( position.indexOf(i) === -1 && count >= 2 ) {
@@ -97,11 +124,15 @@ window.onload = function() {
 
       word.innerHTML = showWord;
 
-  }   // end ofselectWord()
+  }   // end of selectWord()
 
     wordsSet();
 
+    // checkInput is to capture and check the alphabet the user clicked on.
+
     function checkInput() {
+
+      var charSelected = ' ';
 
       if (event.target === document.getElementById('A')) {
         charSelcted = 'a';
@@ -183,14 +214,13 @@ window.onload = function() {
         charSelcted = 'z';
       };
 
-      console.log(charSelcted);
-
       compareStdAns();
 
       wonGame();
 
     } // end of check()
 
+  // startGame()  - strt the game and update the screen.
   function startGame() {
 
     wrong = document.getElementById('wrong-attemp');
@@ -198,24 +228,25 @@ window.onload = function() {
     letter = document.getElementById('letters-used');
     letter.innerHTML = ' ';
 
+    charUsed = [];
+    showWord = ' ';
+    displayWord = [];
+    // letterUsed = ' ';
     selectWord();
-
-    console.log(answer);
+    numOfWrongAttemp = 0;
 
     var buttons = document.getElementById('buttons');
     buttons.addEventListener('click', checkInput);
 
   }   // end of startGame()
 
+  // Compare user input with the word selected.
   function compareStdAns() {
 
     if ( answer.indexOf(charSelcted) === -1 ) {
-      console.log('Wrong input');
       numOfWrongAttemp++;
-      console.log(numOfWrongAttemp);
       wrong = document.getElementById('wrong-attemp');
       wrong.innerHTML = numOfWrongAttemp;
-      console.log(wrong.innerHTML);
     } else {
       index = answer.indexOf(charSelcted);
       displayWord[index] = charSelcted;
@@ -233,23 +264,27 @@ window.onload = function() {
     charUsed.push(charSelcted);
     charUsed.sort();
     letterUsed = charUsed.join('');
-
-    console.log(charUsed);
-    console.log(letterUsed);
+;
     letter = document.getElementById('letters-used');
     letter.innerHTML = letterUsed;
-    console.log(letter);
 
   }  // end of compareStdAns()
 
+  // check whether user has won the game.
   function wonGame() {
 
     if ( numOfWrongAttemp >= 6 ) {
-      word.innerHTML = 'You lost !!!'
+      // word.innerHTML = 'You lost !!!';
+      won = false;
+      buttons.removeEventListener('click', checkInput);
+      winLoss();
       restart();
     } else {
       if ( showWord === wordSelected) {
-        word.innerHTML = 'You won !!!';
+        // word.innerHTML = 'You won !!!';
+        won = true;
+        buttons.removeEventListener('click', checkInput);
+        winLoss();
         restart();
       }
     }
@@ -261,7 +296,132 @@ window.onload = function() {
 
   }
 
+  function winLoss() {
 
+    charA = document.getElementById('A');
+    charA.innerHTML = ' ';
+    charB = document.getElementById('B');
+    charB.innerHTML = ' ';
+    charC = document.getElementById('C');
+    charC.innerHTML = ' ';
+    charD = document.getElementById('D');
+    charD.innerHTML = ' ';
+    charE = document.getElementById('E');
+    charE.innerHTML = ' ';
+    charF = document.getElementById('F');
+    charF.innerHTML = 'Y';
+    charG = document.getElementById('G');
+    charG.innerHTML = 'o';
+    charH = document.getElementById('H');
+    charH.innerHTML = 'u';
+    charI = document.getElementById('I');
+    charI.innerHTML = ' ';
+    charJ = document.getElementById('J');
+    charJ.innerHTML = ' ';
+    charK = document.getElementById('K');
+    charK.innerHTML = ' ';
+    charL = document.getElementById('L');
+    charL.innerHTML = ' ';
+    charM = document.getElementById('M');
+    charM.innerHTML = ' ';
+    charN = document.getElementById('N');
+    charN.innerHTML = ' ';
+    charO = document.getElementById('O');
+    charO.innerHTML = ' ';
+    charP = document.getElementById('P');
+    charP.innerHTML = ' ';
+    charQ = document.getElementById('Q');
+    charQ.innerHTML = ' ';
+    charR = document.getElementById('R');
+    charR.innerHTML = ' ';
+    charS = document.getElementById('S');
+    charS.innerHTML = ' ';
+    charT = document.getElementById('T');
+    charT.innerHTML = ' ';
+    charU = document.getElementById('U');
+    charU.innerHTML = ' ';
+    charV = document.getElementById('V');
+    charV.innerHTML = ' ';
+    charW = document.getElementById('W');
+    charW.innerHTML = ' ';
+    charX = document.getElementById('X');
+    charX.innerHTML = ' ';
+    charY = document.getElementById('Y');
+    charY.innerHTML = ' ';
+    charZ = document.getElementById('Z');
+    charZ.innerHTML = ' ';
+    if ( won ) {
+      charS.innerHTML = 'w';
+      charT.innerHTML = 'o';
+      charU.innerHTML = 'n';
+      charV.innerHTML = '\u263a'; // special character for happy
+    } else {
+      charR.innerHTML = 'l';
+      charS.innerHTML = 'o';
+      charT.innerHTML = 's';
+      charU.innerHTML = 't';
+      charV.innerHTML = '\u2639'; // special character for sad
+    }
 
+  }  // end of winLoss()
+
+  function reinstate() {
+
+    won = false;
+
+    charA = document.getElementById('A');
+    charA.innerHTML = 'A';
+    charB = document.getElementById('B');
+    charB.innerHTML = 'B';
+    charC = document.getElementById('C');
+    charC.innerHTML = 'C';
+    charD = document.getElementById('D');
+    charD.innerHTML = 'D';
+    charE = document.getElementById('E');
+    charE.innerHTML = 'E';
+    charF = document.getElementById('F');
+    charF.innerHTML = 'F';
+    charG = document.getElementById('G');
+    charG.innerHTML = 'G';
+    charH = document.getElementById('H');
+    charH.innerHTML = 'H';
+    charI = document.getElementById('I');
+    charI.innerHTML = 'I';
+    charJ = document.getElementById('J');
+    charJ.innerHTML = 'J';
+    charK = document.getElementById('K');
+    charK.innerHTML = 'K';
+    charL = document.getElementById('L');
+    charL.innerHTML = 'L';
+    charM = document.getElementById('M');
+    charM.innerHTML = 'M';
+    charN = document.getElementById('N');
+    charN.innerHTML = 'N';
+    charO = document.getElementById('O');
+    charO.innerHTML = 'O';
+    charP = document.getElementById('P');
+    charP.innerHTML = 'P';
+    charQ = document.getElementById('Q');
+    charQ.innerHTML = 'Q';
+    charR = document.getElementById('R');
+    charR.innerHTML = 'R';
+    charS = document.getElementById('S');
+    charS.innerHTML = 'S';
+    charT = document.getElementById('T');
+    charT.innerHTML = 'T';
+    charU = document.getElementById('U');
+    charU.innerHTML = 'U';
+    charV = document.getElementById('V');
+    charV.innerHTML = 'V';
+    charW = document.getElementById('W');
+    charW.innerHTML = 'W';
+    charX = document.getElementById('X');
+    charX.innerHTML = 'X';
+    charY = document.getElementById('Y');
+    charY.innerHTML = 'Y';
+    charZ = document.getElementById('Z');
+    charZ.innerHTML = 'Z';
+
+  }
 
   } // end of window onload

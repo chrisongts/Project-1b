@@ -1,4 +1,11 @@
 
+
+img {
+  margin-top: 2%;
+  margin-left: 38%;
+  margin-bottom: -9%;
+}
+
 #game-container {
   width: 65em;
   height: 35em;
@@ -72,22 +79,16 @@
 #letters-used, #wrong-attemp {
   width: 10em;
   height: 3em;
-  /*display: inline-flex;
-  flex-flow: wrap;*/
   border: 2px solid black;
   margin:0 auto;
   margin-left: 8%;
-  /*margin-top: 10%;*/
-  font-size: 1.5em;
+  font-size: 2em;
   font-weight: bold;
-  /*font-style: italic;
-  font-family: fantasy;*/
   background-color: #ffd700;
   text-align: center;
-  padding-top: 4.5%;
+  padding-top: 5.5%;
+  letter-spacing: .1em;
 
-  /*padding-top: .2em;*/
-  /*vertical-align: top;*/
 }
 
 #letter-desc, #wrong-desc {
@@ -118,7 +119,7 @@
 }
 
 #start {
-  margin-right: 3em;
+  margin-right: 2em;
   background-color: #27d44a;
   font-size: .5em;
   border-radius: 100px / 75px;
