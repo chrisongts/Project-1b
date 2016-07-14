@@ -4,6 +4,9 @@ window.onload = function() {
     var numOfWrongAttemp = 0;
     var charUsed = [];
     var displayWord = [];
+    var wordUsed = [];
+    var wordPlayed = 0;
+    var correctAns = 0;
 
     var start = document.getElementById('start');
     start.addEventListener('click', startGame);
@@ -13,40 +16,40 @@ window.onload = function() {
 
     function wordsSet() {
 
-      words = ['authoritative', 'comprehensive', 'mischievous',
-               'provisional', 'hypocritical', 'repository',
-               'undertaker', 'extradition', 'presumptuous',
-               'skyscraper', 'conclusive', 'breakthrough',
-               'relinquish', 'transcribe', 'disruption',
-               'underwrite', 'extinguish', 'commendable',
-               'reciprocate', 'waterfront', 'typography',
-               'responsive', 'standards', 'definitions',
-               'orientations', 'automatically', 'determination',
-               'establishing', 'calculate', 'established',
-               'broadcast', 'mathematics', 'demonstrate',
-               'researchers', 'deliberately', 'statement',
-               'settlement', 'dispute', 'obstacle',
-               'stainless', 'government', 'published',
-               'apprehend', 'arrested', 'investigations',
-               'immediately', 'jeopardise', 'authorities',
-               'accidently', 'suffocate', 'concern',
-               'overloaded', 'vulnerability', 'neglect',
-               'improvement', 'performance', 'expected',
-               'smartphone', 'capacity', 'electronics',
-               'launching', 'surprise', 'responsible',
-               'collection', 'collaboration', 'fashion',
-               'business', 'forecast', 'analysts',
-               'consumption', 'adventure', 'headlines',
-               'alongside', 'diversity', 'collaboration',
-               'understand', 'population', 'community',
-               'childhood', 'provision', 'anniversary',
-               'delinquency', 'celebrity', 'magazine',
-               'superstar', 'popularly', 'production',
-               'television', 'peacefully', 'appreciation',
-               'composition', 'interview', 'director',
-               'deserve', 'alternative', 'possibilities',
-               'proposition', 'sustainable', 'memorial',
-               'violence'];
+      words = ['accidently', 'adventure', 'alongside',
+               'alternative', 'analysts', 'anniversary',
+               'appreciation', 'apprehend', 'arrested',
+               'authoritative', 'authorities', 'automatically',
+               'breakthrough', 'broadcast', 'business',
+               'calculate', 'capacity', 'celebrity',
+               'childhood', 'collaboration', 'ccollateral',
+               'collection', 'commendable', 'community',
+               'composition', 'comprehensive', 'concern',
+               'conclusive', 'consumption', 'definitions',
+               'deliberately', 'delinquency', 'demonstrate',
+               'deserve', 'determination', 'director',
+               'dispute', 'disruption', 'diversity',
+               'electronics', 'established', 'estimate',
+               'expected', 'extinguish', 'extradition',
+               'fashion', 'forecast', 'government',
+               'headlines', 'hypocritical', 'immediately',
+               'improvement', 'interview', 'investigations',
+               'jeopardise', 'launching', 'magazine',
+               'mathematics', 'memorial', 'mischievous',
+               'neglect', 'obstacle', 'orientations',
+               'overloaded', 'peacefully', 'performance',
+               'popularly', 'population', 'possibilities',
+               'presumptuous', 'production', 'proposition',
+               'provided', 'provisional', 'published',
+               'reciprocate', 'relinquish', 'repository',
+               'researchers', 'responsible', 'responsive',
+               'settlement', 'skyscraper', 'smartphone',
+               'stainless', 'standards', 'statement',
+               'suffocate', 'superstar', 'surprise',
+               'sustainable', 'television', 'transcribe',
+               'typography', 'understand', 'undertaker',
+               'underwrite', 'violence', 'vulnerability',
+               'waterfront'];
 
     } // end of wordsSet
 
@@ -59,17 +62,28 @@ window.onload = function() {
       var result = [];
       var position = [];
       var count = 0;
+      var wordUsedLength = 0
+      var checkIndex = 0;
 
       start.removeEventListener('click', startGame);
 
       reinstate();
+
+      wordUsedLength = wordUsed.length;
+      if ( wordUsedLength === 100) {
+        wordUsed = [];
+      };
 
       while (searchWord) {
         random = Math.random();
         if ( random < .993 ) {
           random *= 100;
           index = Math.round(random);
+          checkIndex = wordUsed.indexOf(index);
+          if ( checkIndex === -1) {
           searchWord = false;
+          wordUsed.push(index);
+        };
         };
       };
 
@@ -123,6 +137,8 @@ window.onload = function() {
       showWord = displayWord.join('');
 
       word.innerHTML = showWord;
+
+      wordPlayed++;
 
   }   // end of selectWord()
 
@@ -223,10 +239,14 @@ window.onload = function() {
   // startGame()  - strt the game and update the screen.
   function startGame() {
 
-    wrong = document.getElementById('wrong-attemp');
+    var wrong = document.getElementById('wrong-attemp');
     wrong.innerHTML = ' ';
-    letter = document.getElementById('letters-used');
+    var letter = document.getElementById('letters-used');
     letter.innerHTML = ' ';
+    var wrong = document.getElementById('wrong-attemp');
+    wrong.innerHTML = ' ';
+    var reset = document.getElementById('reset');
+    reset.addEventListener('click', resetGame)
 
     charUsed = [];
     showWord = ' ';
@@ -274,14 +294,12 @@ window.onload = function() {
   function wonGame() {
 
     if ( numOfWrongAttemp >= 6 ) {
-      // word.innerHTML = 'You lost !!!';
       won = false;
       buttons.removeEventListener('click', checkInput);
       winLoss();
       restart();
     } else {
       if ( showWord === wordSelected) {
-        // word.innerHTML = 'You won !!!';
         won = true;
         buttons.removeEventListener('click', checkInput);
         winLoss();
@@ -297,6 +315,8 @@ window.onload = function() {
   }
 
   function winLoss() {
+
+    var scoreString = ' ';
 
     charA = document.getElementById('A');
     charA.innerHTML = ' ';
@@ -355,13 +375,19 @@ window.onload = function() {
       charT.innerHTML = 'o';
       charU.innerHTML = 'n';
       charV.innerHTML = '\u263a'; // special character for happy
+      correctAns++
     } else {
       charR.innerHTML = 'l';
       charS.innerHTML = 'o';
       charT.innerHTML = 's';
       charU.innerHTML = 't';
       charV.innerHTML = '\u2639'; // special character for sad
-    }
+    }  // end of if (won).
+
+    // to output the current score on screen
+    var score = document.getElementById('score-now');
+    scoreString = correctAns + ' / ' + wordPlayed;
+    score.innerHTML = scoreString;
 
   }  // end of winLoss()
 
@@ -422,6 +448,10 @@ window.onload = function() {
     charZ = document.getElementById('Z');
     charZ.innerHTML = 'Z';
 
+  }
+
+  function resetGame() {
+    location.reload(true);
   }
 
   } // end of window onload

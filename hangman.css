@@ -1,5 +1,4 @@
 
-
 img {
   margin-top: 2%;
   margin-left: 38%;
@@ -9,7 +8,6 @@ img {
 #game-container {
   width: 65em;
   height: 35em;
-  /*border: 2px solid red;*/
   margin: 0 auto;
   margin-top: 10%;
   float: left;
@@ -21,7 +19,6 @@ img {
   width: 20em;
   height: 35em;
   float: right;
-  /*border: 2px solid blue;*/
   margin-top: 10%;
   margin-right: 12%;
 }
@@ -42,7 +39,6 @@ img {
   letter-spacing: .1em;
   margin-left: 2%;
   word-wrap: break-word;
-
 }
 
 #button1, #button2 {
@@ -50,7 +46,6 @@ img {
   padding-right:54%;
   text-align: center;
   display: inline-block;
-
 }
 
 #button1 {
@@ -76,9 +71,9 @@ img {
 
 }
 
-#letters-used, #wrong-attemp {
+#letters-used, #wrong-attemp, #score-now {
   width: 10em;
-  height: 3em;
+  height: 2.5em;
   border: 2px solid black;
   margin:0 auto;
   margin-left: 8%;
@@ -91,38 +86,34 @@ img {
 
 }
 
-#letter-desc, #wrong-desc {
+#letter-desc, #wrong-desc, #score-desc {
   font-size: 2em;
-  margin-top: 15%;
+  margin-top: 5%;
   margin-left: 1%;
 }
 
-/*#wrong-attemp {
+#play-buttons {
+  border: none;
   color: black;
+  padding: .2em .5em;
   text-align: center;
-  font-size: .5em;
-
-}*/
-
-#start-button {
-    border: none;
-    color: black;
-    /*padding: .2em 1em;
-    margin: 1.2em;*/
-    text-align: center;
-    text-decoration: none;
-    /*display: inline-block;*/
-    font-size: 5em;
-    width: 5em;
-    border-radius: 100px / 50px;
-    margin-top: 3%;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2em;
+  margin-left: 10%;
+  width: 100%;
+  border-radius: 100px / 75px;
+  margin-top: 12%;
 }
 
 #start {
   margin-right: 2em;
   background-color: #27d44a;
-  font-size: .5em;
   border-radius: 100px / 75px;
+}
+
+#reset {
+  background-color: #dcdcdc;
 }
 
 #clear1 {
