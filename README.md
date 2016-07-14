@@ -11,11 +11,14 @@ shown to the user.
 keys available on screen.
 5. The program will check on the alphabet selected by the user whether it is part of the
 selected word. If yes then it will replace the underscore _ with the alphabet selected.
-If the alphabet not found in the selected word then the counter for the wrong attempt will
-be increased by 1.
-6. Once the user has successfully guessed all the alphabets of the selected word correctly,
-the program will notify user has won the game. If the number of wrong attempts has accumulated
-6 counts then the program will notify the user has lost the game. At this point user can
-click on the Start button to start a new game.
-7. There is a counter to keep track the score.
-8. At any point the user can click on the Reset button to reload the game.
+6. If the alphabet not found in the selected word then the number of attempts left counter
+will be decreased by 1.
+7. Once the user has successfully guessed all the alphabets of the selected word correctly,
+the program will notify user has won the game.
+8. If the number of attempts left has reached 0 then the program will notify the user has
+lost the game. At this point user can click on the Start button to start a new game.
+9. The program will track the score.
+10. At any point the user can click on the Reset button to reload the game.
+
+Reference :
+Downloaded the Hangman png file from web.

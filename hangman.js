@@ -1,7 +1,7 @@
 window.onload = function() {
 
     var charSelcted = ' ';
-    var numOfWrongAttemp = 0;
+    var numOfWrongAttemp = 6;
     var charUsed = [];
     var displayWord = [];
     var wordUsed = [];
@@ -22,7 +22,7 @@ window.onload = function() {
                'authoritative', 'authorities', 'automatically',
                'breakthrough', 'broadcast', 'business',
                'calculate', 'capacity', 'celebrity',
-               'childhood', 'collaboration', 'ccollateral',
+               'childhood', 'collaboration', 'collateral',
                'collection', 'commendable', 'community',
                'composition', 'comprehensive', 'concern',
                'conclusive', 'consumption', 'definitions',
@@ -88,6 +88,7 @@ window.onload = function() {
       };
 
       var word = document.getElementById('word');
+      wrong = document.getElementById('wrong-attemp'); // added for count down
 
       wordSelected = words[index];
       answer = wordSelected.split('');
@@ -244,7 +245,8 @@ window.onload = function() {
     var letter = document.getElementById('letters-used');
     letter.innerHTML = ' ';
     var wrong = document.getElementById('wrong-attemp');
-    wrong.innerHTML = ' ';
+    // wrong.innerHTML = ' ';
+    wrong.innerHTML = '6';
     var reset = document.getElementById('reset');
     reset.addEventListener('click', resetGame)
 
@@ -253,7 +255,8 @@ window.onload = function() {
     displayWord = [];
     // letterUsed = ' ';
     selectWord();
-    numOfWrongAttemp = 0;
+    // numOfWrongAttemp = 0;
+    numOfWrongAttemp = 6;
 
     var buttons = document.getElementById('buttons');
     buttons.addEventListener('click', checkInput);
@@ -264,7 +267,8 @@ window.onload = function() {
   function compareStdAns() {
 
     if ( answer.indexOf(charSelcted) === -1 ) {
-      numOfWrongAttemp++;
+      // numOfWrongAttemp++;
+      numOfWrongAttemp--;
       wrong = document.getElementById('wrong-attemp');
       wrong.innerHTML = numOfWrongAttemp;
     } else {
@@ -293,7 +297,8 @@ window.onload = function() {
   // check whether user has won the game.
   function wonGame() {
 
-    if ( numOfWrongAttemp >= 6 ) {
+    // if ( numOfWrongAttemp >= 6 ) {
+    if ( numOfWrongAttemp <= 0 ) {
       won = false;
       buttons.removeEventListener('click', checkInput);
       winLoss();
